@@ -6,17 +6,24 @@ import './index.css';
 
 const Backdrop=()=>{
     const [quotes,setQuotes]=useState({});
-
+    const [status,setStatus]=useState('idle');
+    const [url,setUrl]=useState("https://gist.githubusercontent.com/camperbot/5a022b72e96c4c9585c32bf6a75f62d9/raw/e3c6895ce42069f0ee7e991229064f167fe8ccdc/quotes.json");
     useEffect(()=>{
-        if (!quotes)return;
-        fetch("https://gist.githubusercontent.com/camperbot/5a022b72e96c4c9585c32bf6a75f62d9/raw/e3c6895ce42069f0ee7e991229064f167fe8ccdc/quotes.json")
-        .then(response=>response.json())
-        .then(data=>{
-            
+        if (!url)return;
+        const fetchData=async ()=>{
+            setStatus('fetching');
+
+                const response=await fetch(url);
+                const data=await response.json();
+
+
+
             setQuotes(data);
-        })
-        .catch(e=>console.log(e))
-    },[quotes]);
+            setStatus('fetched');
+        }
+        fetchData().catch(console.log);
+
+    },[url]);
 
 
 
