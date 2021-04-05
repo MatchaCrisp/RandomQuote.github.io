@@ -5,66 +5,80 @@ import './index.css';
 
 
 const Backdrop=()=>{
-    const randomize=ranMax=> Math.floor(Math.random*ranMax);
-
-
-
-    return (
-        <div className="backdrop">
-
-            <QuoteBox/>
-        </div>
-    )
-};
-
-const QuoteBox=props=>{
-    const [quotes,setQuotes]=useState({});
+    const [theme,setTheme]=useState(1);
+    const [quotes,setQuotes]=useState([]);
     const [status,setStatus]=useState('idle');
-    const [quotePack,setQuotePack]=useState({});
-    const [url,setUrl]=useState("https://gist.githubusercontent.com/camperbot/5a022b72e96c4c9585c32bf6a75f62d9/raw/e3c6895ce42069f0ee7e991229064f167fe8ccdc/quotes.json");
-    let quoteCont;
+    const [quotePack,setQuotePack]=useState({quote:'',author:''});
+    const [url]=useState("https://gist.githubusercontent.com/camperbot/5a022b72e96c4c9585c32bf6a75f62d9/raw/e3c6895ce42069f0ee7e991229064f167fe8ccdc/quotes.json");
+    console.log('theme',theme,'quotes',quotes,'quotePack',quotePack);
     useEffect(()=>{
         if (!url)return;
         const fetchData=async ()=>{
             setStatus('fetching');
-
                 const response=await fetch(url);
                 const data=await response.json();
 
-
-
-            setQuotes(data);
+            setQuotes(data.quotes);
+            
             setStatus('fetched');
         }
         fetchData().catch(console.log);
 
     },[url]);
-    useEffect(()=>{
-        if (status==='fetching')
-            quoteCont=<img src="img/loading.gif" className="loading" alt="loading symbol"></img>
-        else if (status==='fetched')
-            quoteCont=<div id="quoteWrap"><p id="text">ipsumy</p>
-            <p id="author">ippy</p></div>
 
+    useEffect(()=>{
+        if (quotes.length===0) return;
+
+        setTheme(randomize(9));
+        setQuotePack(quotes[randomize(quotes.length)]);
+    },[quotes]);
+
+    useEffect(()=>{
+        console.log(status);
     },[status]);
+
+    const randomize=ranMax=> {
+
+        const rand=Math.floor(Math.random()*ranMax);
+        console.log(rand);
+        return rand;
+    }
+
+    const onNewQuote=()=>{
+        setTheme(randomize(9));
+        setQuotePack(quotes[randomize(quotes.length)]);
+    };
+
     return (
-        <div className='quoteBox' id='quote-box'>
-            {quoteCont}
-            <TweetButton />
-            <NewQuoteButton />
+        <div className="backdrop" style={{backgroundColor:`var(--col-pri-${theme})`}}>
+
+            <QuoteBox getQuote={onNewQuote} quote={quotePack} theme={theme}/>
         </div>
     )
 };
 
-const TweetButton=()=>{
+const QuoteBox=props=>{
+    console.log('quoteBox received',props)
     return (
-        <button className='tweetButton' >Tweet</button>
+        <div className='quoteBox' id='quote-box' style={{backgroundColor:`var(--col-acc1-${props.theme})`,color:`var(--col-txt1-${props.theme})`}}>
+            <p id="quote">{props.quote.quote}</p>
+            <p id="author">{props.quote.author}</p>
+            <TweetButton theme={props.theme}/>
+            <NewQuoteButton onClick={props.getQuote} theme={props.theme}/>
+        </div>
     )
 };
 
-const NewQuoteButton=()=>{
+const TweetButton=props=>{
     return (
-        <button className='newQuoteButton' >New Quote</button>
+        <button className='tweetButton' style={{backgroundColor:`var(--col-pri-${props.theme})`}}>Tweet</button>
+    )
+};
+
+const NewQuoteButton=props=>{
+    console.log('new quote button received', props)
+    return (
+        <button className='newQuoteButton' onClick={props.onClick} style={{backgroundColor:`var(--col-pri-${props.theme})`}}>New Quote</button>
     )
 };
 

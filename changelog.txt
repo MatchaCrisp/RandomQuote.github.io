@@ -1,0 +1,4 @@
+v0.5 fin quote/theme change
+    todo: add pause while fetchingn
+        add pause while changing quotes
+        style

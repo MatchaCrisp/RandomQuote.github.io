@@ -66,7 +66,53 @@ a {
 /*===========================================================*/
 
 /*=============globals===================*/
-
+:root {
+    --col-pri-0:#492b7c;
+    --col-pri-1:#e0f0ea;
+    --col-pri-2:#f7a400;
+    --col-pri-3:#27104e;
+    --col-pri-4:#361d32;
+    --col-pri-5:#072448;
+    --col-pri-6:#272643;
+    --col-pri-7:#8a00d4;
+    --col-pri-8:#ffa822;
+    --col-txt1-0:#301551;
+    --col-txt1-1:#95adbe;
+    --col-txt1-2:#3a9efd;
+    --col-txt1-3:#64379f;
+    --col-txt1-4:#543c52;
+    --col-txt1-5:#54d2d2;
+    --col-txt1-6:#ffffff;
+    --col-txt1-7:#d527b7;
+    --col-txt1-8:#134e6f;
+    --col-txt2-0:#fff29c;
+    --col-txt2-1:#3c2a4d;
+    --col-txt2-2:#1a1b4b;
+    --col-txt2-3:#75e8e7;
+    --col-txt2-4:#f1e8e6;
+    --col-txt2-5:#ff6150;
+    --col-txt2-6:#2c698d;
+    --col-txt2-7:#e3e3e3;
+    --col-txt2-8:#dee0e6;
+    --col-acc1-0:#ed8a0a;
+    --col-acc1-1:#574f7d;
+    --col-acc1-2:#3e4491;
+    --col-acc1-3:#9854cb;
+    --col-acc1-4:#f55951;
+    --col-acc1-5:#ffcb00;
+    --col-acc1-6:#e3f6f5;
+    --col-acc1-7:#f782c2;
+    --col-acc1-8:#ff6150;
+    --col-acc2-0:#f6d912;
+    --col-acc2-1:#503a65;
+    --col-acc2-2:#292a73;
+    --col-acc2-3:#ddacf5;
+    --col-acc2-4:#edd2cb;
+    --col-acc2-5:#f8aa4b;
+    --col-acc2-6:#bae8e8;
+    --col-acc2-7:#f9c46b;
+    --col-acc2-8:#1ac0c6;
+}
 *, *::before {
     box-sizing:border-box;
     margin:0;
