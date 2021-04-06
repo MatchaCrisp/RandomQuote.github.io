@@ -5,12 +5,18 @@ import './index.css';
 
 
 const Backdrop=()=>{
+    //what color theme to use 
     const [theme,setTheme]=useState(1);
+    //the entirety of quotes.json
     const [quotes,setQuotes]=useState([]);
+    //data fetching/quote setting status
     const [status,setStatus]=useState('idle');
+    //one quote/author passed to QuoteBOx
     const [quotePack,setQuotePack]=useState({quote:'',author:''});
-    const [url]=useState("https://gist.githubusercontent.com/camperbot/5a022b72e96c4c9585c32bf6a75f62d9/raw/e3c6895ce42069f0ee7e991229064f167fe8ccdc/quotes.json");
-    console.log('theme',theme,'quotes',quotes,'quotePack',quotePack);
+    //url of quotes.json
+    const [url]=useState("https://raw.githubusercontent.com/MatchaCrisp/RandomQuote.github.io/main/src/data/quotes.json");
+
+    //fetching quotes.json
     useEffect(()=>{
         if (!url)return;
         const fetchData=async ()=>{
@@ -26,6 +32,7 @@ const Backdrop=()=>{
 
     },[url]);
 
+    //initialize first quote
     useEffect(()=>{
         if (quotes.length===0) return;
 
@@ -33,52 +40,72 @@ const Backdrop=()=>{
         setQuotePack(quotes[randomize(quotes.length)]);
     },[quotes]);
 
+    //loading screen at beginning while fetching, disable buttons while setting quotes
     useEffect(()=>{
         console.log(status);
     },[status]);
 
-    const randomize=ranMax=> {
+    //random theme/quote
+    const randomize=ranMax=> Math.floor(Math.random()*ranMax);
 
-        const rand=Math.floor(Math.random()*ranMax);
-        console.log(rand);
-        return rand;
-    }
-
+    //onclick for when new quote button is pressed
     const onNewQuote=()=>{
         setTheme(randomize(9));
         setQuotePack(quotes[randomize(quotes.length)]);
     };
 
     return (
-        <div className="backdrop" style={{backgroundColor:`var(--col-pri-${theme})`}}>
-
-            <QuoteBox getQuote={onNewQuote} quote={quotePack} theme={theme}/>
+        <div 
+            id="backdrop" 
+            style={{backgroundColor:`var(--col-pri-${theme})`}}>
+                <QuoteBox getQuote={onNewQuote} quote={quotePack} theme={theme}/>
         </div>
     )
 };
 
 const QuoteBox=props=>{
-    console.log('quoteBox received',props)
     return (
-        <div className='quoteBox' id='quote-box' style={{backgroundColor:`var(--col-acc1-${props.theme})`,color:`var(--col-txt1-${props.theme})`}}>
-            <p id="quote">{props.quote.quote}</p>
-            <p id="author">{props.quote.author}</p>
-            <TweetButton theme={props.theme}/>
-            <NewQuoteButton onClick={props.getQuote} theme={props.theme}/>
+        <div 
+            id='quote-box' 
+            style={{backgroundColor:`var(--col-acc1-${props.theme})`,color:`var(--col-txt1-${props.theme})`}}>
+                <div id="contQuote">
+                    <p id="quote">{props.quote.quote}</p>
+                    <p id="author">-{props.quote.author}</p>
+                </div>
+                <div id="contButton">
+                    <TweetButton theme={props.theme} quote={props.quote}/>
+                    <NewQuoteButton onClick={props.getQuote} theme={props.theme}/>
+                </div>
+
         </div>
     )
 };
 
 const TweetButton=props=>{
+    const tweetUrl=`https://twitter.com/intent/tweet?hashtags=quotes&related=freecodecamp&text=${encodeURIComponent('"'+props.quote.quote+'" '+props.quote.author)}`;
     return (
-        <button className='tweetButton' style={{backgroundColor:`var(--col-pri-${props.theme})`}}>Tweet</button>
+        <a 
+            id='tweetButton'
+            className='button' 
+            href={tweetUrl}
+            target="_blank"
+            style={{backgroundColor:`var(--col-pri-${props.theme})`,
+                    color:`var(--col-acc2-${props.theme})`}}>
+                <i class="fab fa-twitter"></i>
+        </a>
     )
 };
 
 const NewQuoteButton=props=>{
-    console.log('new quote button received', props)
     return (
-        <button className='newQuoteButton' onClick={props.onClick} style={{backgroundColor:`var(--col-pri-${props.theme})`}}>New Quote</button>
+        <button 
+            id='newQuoteButton'
+            className='button' 
+            onClick={props.onClick} 
+            style={{backgroundColor:`var(--col-pri-${props.theme})`,
+                    color:`var(--col-acc2-${props.theme})`}}>
+                New Quote
+        </button>
     )
 };
 

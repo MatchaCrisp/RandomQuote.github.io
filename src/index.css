@@ -119,9 +119,10 @@ a {
 }
 
 html {
-    font-size:16px;
+    font-size:32px;
     color:white;
     height:100%;
+    font-family:roboto, sans-serif;
 }
 
 body {
@@ -135,30 +136,58 @@ a {
 }
 /*==============================*/
 
-.backdrop {
+#backdrop {
     position:relative;
     height:100vh;
     width:100vw;
-    background-color: antiquewhite;
+
     display:flex;
     align-items:center;
     justify-content: center;
 }
-.quoteBox {
-    width:min-content;
+#quote-box {
+    width:100%;
     height:min-content;
-    background-color:gray;
-    padding:2rem;
+
 }
-.tweetButton {
-    border:none;
-    height:50px;
-    width:50px;
-    background-color:blue;
+
+#contQuote {
+    margin:2rem;
 }
-.newQuoteButton {
+#quote {
+    margin-bottom:1rem;
+    font-size:1.25rem;
+}
+#author {
+    text-align: right;
+    font-size:0.75rem;
+}
+#contButton {
+    margin:1rem;
+    display:flex;
+    flex-flow:row nowrap;
+    justify-content: space-between;
+    align-items: center;
+}
+.button {
     border:none;
-    height:50px;
-    width:100px;
-    background-color:blue;
+    cursor: pointer;
+    border-radius:5px;
+    padding:0.25rem;
+}
+
+.button:hover {
+    filter:brightness(150%);
+}
+.button:active {
+    filter:brightness(75%);
+}
+#tweetButton {
+
+
+
+}
+#newQuoteButton {
+    font-size:24px;
+
 }

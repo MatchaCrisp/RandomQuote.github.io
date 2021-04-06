@@ -1,4 +1,8 @@
 v0.5 fin quote/theme change
     todo: add pause while fetchingn
+        add tweet button
         add pause while changing quotes
-        style
+        style/animation
+
+v0.6 fin tweet button, rough CSS
+    todo: custom hashtags
