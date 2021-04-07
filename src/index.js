@@ -20,13 +20,13 @@ const Backdrop=()=>{
     useEffect(()=>{
         if (!url)return;
         const fetchData=async ()=>{
-            setStatus('fetching');
+            setStatus('busy');
                 const response=await fetch(url);
                 const data=await response.json();
 
             setQuotes(data.quotes);
             
-            setStatus('fetched');
+            setStatus('idle');
         }
         fetchData().catch(console.log);
 
@@ -50,8 +50,10 @@ const Backdrop=()=>{
 
     //onclick for when new quote button is pressed
     const onNewQuote=()=>{
+        setStatus('busy');
         setTheme(randomize(9));
         setQuotePack(quotes[randomize(quotes.length)]);
+        setStatus('idle');
     };
 
     return (
