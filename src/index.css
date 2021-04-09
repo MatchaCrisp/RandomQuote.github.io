@@ -100,7 +100,7 @@ a {
     --col-acc1-3:#9854cb;
     --col-acc1-4:#f55951;
     --col-acc1-5:#ffcb00;
-    --col-acc1-6:#e3f6f5;
+    --col-acc1-6:#c9d5ff;
     --col-acc1-7:#f782c2;
     --col-acc1-8:#ff6150;
     --col-acc2-0:#f6d912;
@@ -109,7 +109,7 @@ a {
     --col-acc2-3:#ddacf5;
     --col-acc2-4:#edd2cb;
     --col-acc2-5:#f8aa4b;
-    --col-acc2-6:#bae8e8;
+    --col-acc2-6:#e4eaff;
     --col-acc2-7:#f9c46b;
     --col-acc2-8:#1ac0c6;
 }
@@ -135,7 +135,81 @@ a {
     color:white;
 }
 /*==============================*/
+@keyframes bouncy {
+    0% {
+        padding:0;
+    }
+    20% {
+        padding:1.5rem 0 1.5rem 0;
+    }
+    38% {
+        padding:0;
+    }
 
+    56% {
+        padding:0.75rem 0 0.75rem 0;
+    }
+
+    72% {
+        padding:0;
+    }
+
+    88% {
+        padding:0.25rem 0 0.25rem 0;
+    }
+
+    100% {
+        padding:0;
+    }
+}
+
+@keyframes bouncy2 {
+    0% {
+        padding:0;
+    }
+    20% {
+        padding:1.5rem;
+    }
+    38% {
+        padding:0;
+    }
+
+    56% {
+        padding:0.75rem;
+    }
+
+    72% {
+        padding:0;
+    }
+
+    88% {
+        padding:0.25rem;
+    }
+
+    100% {
+        padding:0;
+    }
+}
+
+@keyframes expand {
+    0% {
+        top:50%;
+        left:50%;
+        height:0;
+        width:0;
+
+    }
+
+    100% {
+        top:0;
+        left:0;
+        height:100%;
+        width:100%;
+    }
+}
+#backAnim {
+    position:absolute;
+}
 #backdrop {
     position:relative;
     height:100vh;
@@ -144,21 +218,30 @@ a {
     display:flex;
     align-items:center;
     justify-content: center;
+    overflow:hidden;
 }
 #quote-box {
+    position:relative;
+    z-index:2;
     width:100%;
-    height:min-content;
-
+    box-sizing:content-box;
+    min-height:12rem;
+    display:flex;
+    flex-flow: column nowrap;
+    justify-content: space-around;
+    max-width:24rem;
+    
 }
 
 #contQuote {
-    margin:2rem;
+    margin:1rem;
 }
-#quote {
+#text {
     margin-bottom:1rem;
     font-size:1.25rem;
 }
 #author {
+
     text-align: right;
     font-size:0.75rem;
 }
@@ -170,10 +253,12 @@ a {
     align-items: center;
 }
 .button {
+    display:block;
     border:none;
     cursor: pointer;
-    border-radius:5px;
+    border-radius:0.25rem;
     padding:0.25rem;
+    text-align: center;
 }
 
 .button:hover {
@@ -181,13 +266,51 @@ a {
 }
 .button:active {
     filter:brightness(75%);
-}
-#tweetButton {
-
-
 
 }
-#newQuoteButton {
-    font-size:24px;
+#tweet-quote {
+    height: 1.75rem;
+    width:1.75rem;
+    font-size:1.25rem;
 
 }
+#new-quote {
+    height:1.75rem;
+    width:5rem;
+    font-size:0.75rem;
+
+}
+
+.disableButton {
+    border:none;
+    border-radius:0.25rem;
+    padding:0.25rem;
+    background-color:grey;
+    cursor:not-allowed;
+}
+
+.large {
+    height:6rem;
+    width:6rem;
+}
+
+.small {
+    height:1.25rem;
+    width:1.25rem;
+}
+
+.centered {
+    display:block;
+    margin:0 auto;
+}
+
+#backAnim {
+    height:100px;
+    width:100px;
+}
+@media only screen and (min-width:769px) {
+    #quote-box {
+        border-radius:0.5rem;
+    }
+}
+
