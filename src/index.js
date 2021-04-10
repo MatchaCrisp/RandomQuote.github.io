@@ -83,6 +83,7 @@ const Expander =props =>{
 }
 const QuoteBox=props=>{
     const q = <div id="contQuote">
+                <ul id="hashtags">{props.quote.hashtag.map((taggy,ind)=><li key={ind}>`#${taggy}`</li>)}</ul>
                 <p id="text">{props.quote.quote}</p>
                 <p id="author">-{props.quote.author}</p>
             </div>
