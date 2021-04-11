@@ -12,11 +12,14 @@ const Backdrop=()=>{
     //data fetching/quote setting status
     const [status,setStatus]=useState('idle');
     //one quote/author passed to QuoteBOx
-    const [quotePack,setQuotePack]=useState({quote:'',author:''});
+    const [quotePack,setQuotePack]=useState({quote:'',author:'',hashtag:[]});
     //url of quotes.json
     const [url]=useState("https://raw.githubusercontent.com/MatchaCrisp/RandomQuote.github.io/main/src/data/quotes.json");
-
     let prevC=0;
+
+        //random theme/quote
+        const randomize=ranMax=> Math.floor(Math.random()*ranMax);
+
     //fetching quotes.json
     useEffect(()=>{
         if (!url)return;
@@ -26,11 +29,9 @@ const Backdrop=()=>{
                 const data=await response.json();
 
             setQuotes(data.quotes);
-            
             setStatus('idle');
         }
         fetchData().catch(console.log);
-
     },[url]);
 
     //initialize first quote
@@ -48,14 +49,19 @@ const Backdrop=()=>{
         console.log(status);
     },[status]);
 
-    //random theme/quote
-    const randomize=ranMax=> Math.floor(Math.random()*ranMax);
+
+
+
 
     //onclick for when new quote button is pressed
     const onNewQuote= async()=>{
         setStatus('busy');
-        setTheme(randomize(9));
-        setQuotePack(quotes[randomize(quotes.length)]);
+        let newT=theme;
+        while (newT===theme) newT=randomize(9);
+        setTheme(newT);
+        let newQ=quotePack;
+        while (newQ===quotePack) newQ=quotes[randomize(quotes.length)];
+        setQuotePack(newQ);
         await new Promise(resolve => setTimeout(resolve, 400));
         prevC=theme;
 
@@ -63,7 +69,7 @@ const Backdrop=()=>{
     };
 
     
-    
+    //delay loading of backdrop until expander fills screen
     return (
         <div 
             id="backdrop"
@@ -74,6 +80,8 @@ const Backdrop=()=>{
         </div>
     )
 };
+
+//fills screen in 450ms when changing quotes, default is 0 size middle of screen
 const Expander =props =>{
     return (
         <div id="backAnim"
@@ -81,13 +89,16 @@ const Expander =props =>{
                     animation:props.status==="busy"?'expand 450ms':'none'}} />
     )
 }
+
+//content box, when changing quotes displays loading animation and bounces
 const QuoteBox=props=>{
     const q = <div id="contQuote">
-                <ul id="hashtags">{props.quote.hashtag.map((taggy,ind)=><li key={ind}>`#${taggy}`</li>)}</ul>
+                <ul id="hashtags">{props.quote.hashtag.map((taggy,ind)=><li key={ind}>#{taggy}</li>)}</ul>
                 <p id="text">{props.quote.quote}</p>
                 <p id="author">-{props.quote.author}</p>
             </div>
-    const b = <img src="https://media0.giphy.com/media/3o7TKtnuHOHHUjR38Y/giphy.gif" alt="loading" className="large centered"/>
+    const b = <img src="https://raw.githubusercontent.com/MatchaCrisp/RandomQuote.github.io/main/src/img/loading.gif" alt="loading" className="large centered"/>
+   
     return (
         <div 
             id='quote-box' 
@@ -107,10 +118,12 @@ const QuoteBox=props=>{
     )
 };
 
+//displays loading animation and is disabled when changing quotes, adds custom hashtags to tweet
 const TweetButton=props=>{
-    const b = <img src="https://media0.giphy.com/media/3o7TKtnuHOHHUjR38Y/giphy.gif" alt="loading" className="small"/>
+    const b = <img src="https://raw.githubusercontent.com/MatchaCrisp/RandomQuote.github.io/main/src/img/loading.gif" alt="loading" className="small"/>
     const t= <i className="fab fa-twitter"></i>
-    const tweetUrl=`https://twitter.com/intent/tweet?hashtags=quotes&related=freecodecamp&text=${encodeURIComponent('"'+props.quote.quote+'" '+props.quote.author)}`;
+    const h=props.quote.hashtag.join(',');
+    const tweetUrl=`https://twitter.com/intent/tweet?hashtags=${h}&related=freecodecamp&text=${encodeURIComponent('"'+props.quote.quote+'" '+props.quote.author)}`;
     return (
         <a 
             id='tweet-quote'
@@ -125,15 +138,17 @@ const TweetButton=props=>{
     )
 };
 
+//displays loading animation and is disabled when changing quotes
 const NewQuoteButton=props=>{
-    const b = <img src="https://media0.giphy.com/media/3o7TKtnuHOHHUjR38Y/giphy.gif" alt="loading" className="small"/>
+    const b = <img src="https://raw.githubusercontent.com/MatchaCrisp/RandomQuote.github.io/main/src/img/loading.gif" alt="loading" className="small"/>
     return (
         <button 
             id='new-quote'
             className={props.status!=='idle'?'disableButton':'button'} 
             onClick={props.status!=='idle'?null:props.onClick} 
             style={{backgroundColor:props.status!=='idle'?"grey":`var(--col-pri-${props.theme})`,
-                    color:`var(--col-acc2-${props.theme})`}}>
+                    color:`var(--col-acc2-${props.theme})`}}
+                disabled={props.status!=='idle'}>
                 {props.status!=='idle'?b:'New Quote'}
         </button>
     )

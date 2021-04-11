@@ -135,6 +135,8 @@ a {
     color:white;
 }
 /*==============================*/
+
+/*===============animation================*/
 @keyframes bouncy {
     0% {
         padding:0;
@@ -207,9 +209,16 @@ a {
         width:100%;
     }
 }
+
+/*===============================*/
+
+/*=============backdrop/expanding div==================*/
 #backAnim {
     position:absolute;
+    height:10px;
+    width:10px;
 }
+
 #backdrop {
     position:relative;
     height:100vh;
@@ -220,6 +229,9 @@ a {
     justify-content: center;
     overflow:hidden;
 }
+/*===============================*/
+
+/*==============quote box=================*/
 #quote-box {
     position:relative;
     z-index:2;
@@ -233,9 +245,22 @@ a {
     
 }
 
+/*-------------text content-----------------*/
+
 #contQuote {
     margin:1rem;
 }
+
+#hashtags {
+    filter:brightness(90%);
+    font-size:0.5rem;
+    margin-bottom:0.5rem;
+}
+#hashtags li {
+    display:inline-block;
+    margin:0 0.1rem 0 0.1rem;
+}
+
 #text {
     margin-bottom:1rem;
     font-size:1.25rem;
@@ -245,12 +270,24 @@ a {
     text-align: right;
     font-size:0.75rem;
 }
+
+/*------------------------------*/
+
+/*--------------buttons----------------*/
 #contButton {
     margin:1rem;
     display:flex;
     flex-flow:row nowrap;
     justify-content: space-between;
     align-items: center;
+}
+.disableButton {
+    border:none;
+    border-radius:0.25rem;
+    padding:0.25rem;
+    background-color:grey;
+
+    cursor:not-allowed;
 }
 .button {
     display:block;
@@ -281,14 +318,11 @@ a {
 
 }
 
-.disableButton {
-    border:none;
-    border-radius:0.25rem;
-    padding:0.25rem;
-    background-color:grey;
-    cursor:not-allowed;
-}
+/*------------------------------*/
 
+/*============================*/
+
+/*==============loading==============*/
 .large {
     height:6rem;
     width:6rem;
@@ -303,14 +337,11 @@ a {
     display:block;
     margin:0 auto;
 }
-
-#backAnim {
-    height:100px;
-    width:100px;
-}
+/*============================*/
+/*===============media queries=============*/
 @media only screen and (min-width:769px) {
     #quote-box {
         border-radius:0.5rem;
     }
 }
-
+/*============================*/
