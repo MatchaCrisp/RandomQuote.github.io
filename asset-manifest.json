@@ -1,0 +1,20 @@
+{
+  "files": {
+    "main.css": "/RandomQuote.github.io/static/css/main.93890e34.chunk.css",
+    "main.js": "/RandomQuote.github.io/static/js/main.16a5472a.chunk.js",
+    "main.js.map": "/RandomQuote.github.io/static/js/main.16a5472a.chunk.js.map",
+    "runtime-main.js": "/RandomQuote.github.io/static/js/runtime-main.9b0b626a.js",
+    "runtime-main.js.map": "/RandomQuote.github.io/static/js/runtime-main.9b0b626a.js.map",
+    "static/js/2.7e186618.chunk.js": "/RandomQuote.github.io/static/js/2.7e186618.chunk.js",
+    "static/js/2.7e186618.chunk.js.map": "/RandomQuote.github.io/static/js/2.7e186618.chunk.js.map",
+    "index.html": "/RandomQuote.github.io/index.html",
+    "static/css/main.93890e34.chunk.css.map": "/RandomQuote.github.io/static/css/main.93890e34.chunk.css.map",
+    "static/js/2.7e186618.chunk.js.LICENSE.txt": "/RandomQuote.github.io/static/js/2.7e186618.chunk.js.LICENSE.txt"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.9b0b626a.js",
+    "static/js/2.7e186618.chunk.js",
+    "static/css/main.93890e34.chunk.css",
+    "static/js/main.16a5472a.chunk.js"
+  ]
+}
