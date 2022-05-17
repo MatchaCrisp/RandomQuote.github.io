@@ -1,18 +1,14 @@
 {
   "homepage":"http://MatchaCrisp.github.io/RandomQuote.github.io",
-  "name": "jinga",
-  "version": "0.1.0",
+  "name": "random-quote-generator",
+  "description": "generates random quotes on user button press",
+  "author":"Junyan Ye",
+  "version": "0.8.1",
   "private": true,
   "dependencies": {
-    "@testing-library/jest-dom": "^5.11.9",
-    "@testing-library/react": "^11.2.5",
-    "@testing-library/user-event": "^12.8.3",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
-    "react-redux": "^7.2.2",
-    "react-scripts": "4.0.3",
-    "redux": "^4.0.5",
-    "web-vitals": "^1.1.1"
+    "react-scripts": "4.0.3"
   },
   "scripts": {
     "predeploy":"npm run build",
